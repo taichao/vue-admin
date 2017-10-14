@@ -8,8 +8,10 @@ import user from './views/nav1/user.vue'
 import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
+import ArticleList from './views/news/ArticleList.vue'
+import CommentList from './views/news/CommentList.vue'
 import echarts from './views/charts/echarts.vue'
-
+import VueRouter from 'vue-router'
 let routes = [
     {
         path: '/login',
@@ -22,6 +24,17 @@ let routes = [
         component: NotFound,
         name: '',
         hidden: true
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '',
+        iconCls: 'fa fa-address-card',
+        leaf: true,//只有一个节点
+        children: [
+            { path: '/article-list', component: ArticleList, name: '新闻列表' },
+            { path: '/comment-list', component: CommentList, name: '评论列表' }
+        ]
     },
     //{ path: '/main', component: Main },
     {
@@ -71,5 +84,7 @@ let routes = [
         redirect: { path: '/404' }
     }
 ];
-
-export default routes;
+const router = new VueRouter({
+  routes
+})
+export default router;
